@@ -1,0 +1,28 @@
+version: '3'
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: capstone-jenkins
+    ports:
+      - 9080:8080
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    networks:
+      - capstone-network
+
+  nexus:
+    image: sonatype/nexus3:latest
+    container_name: capstone-nexus
+    ports:
+      - 9081:8081
+    volumes:
+      - nexus_data:/nexus-data
+    networks:
+      - capstone-network
+
+networks:
+  capstone-network:
+
+volumes:
+  jenkins_home:
+  nexus_data:
